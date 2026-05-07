@@ -178,4 +178,23 @@ def help_command(message):
 # =========================
 print("DW Bot Running...")
 
-bot.infinity_polling()
+while True:
+    try:
+        print("Bot Running...")
+        bot.infinity_polling(timeout=10, long_polling_timeout=5)
+    except Exception as e:
+        print(f"Error: {e}")
+        time.sleep(5)
+        from flask import Flask
+from threading import Thread
+
+app = Flask('')
+
+@app.route('/')
+def home():
+    return "Bot Running"
+
+def run():
+    app.run(host='0.0.0.0', port=8080)
+
+Thread(target=run).start()
